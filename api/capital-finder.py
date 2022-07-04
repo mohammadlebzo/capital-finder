@@ -2,27 +2,26 @@ from http.server import BaseHTTPRequestHandler
 from urllib import parse
 import requests
 
+
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         s = self.path
         url_components = parse.urlsplit(s)
         query_string_list = parse.parse_qsl(url_components.query)
         dic = dict(query_string_list)
-        definitions = []
-        if 'name' in dic:
-            name = dic['name']
+        output = ''
+        if 'country' in dic:
+            country = dic['country']
             url = 'https://restcountries.com/v3.1/name/'
-            r = requests.get(url + name)
+            r = requests.get(url + country)
             data = r.json()
-            for word_data in data:
-                definition = word_data["name"]["common"]
-                definitions.append(definition)
+            for items in data:
+                output = f"The capital of {items['name']['common'][0]} is {items['capital'][0]}"
 
-            message = str(definitions)
+            message = output
 
-        # else:
-        #     message = "Please provide me with a word"
-
+        else:
+            message = "Please provide me with a word"
 
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
