@@ -4,24 +4,25 @@ import requests
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        # s = self.path
-        # url_components = parse.urlsplit(s)
-        # query_string_list = parse.parse_qsl(url_components.query)
-        # dic = dict(query_string_list)
-        # definitions = []
-        # if 'word' in dic:
-        # word = dic['word']
-        url = 'https://restcountries.com/v3.1/name/jordan'
-        r = requests.get(url)
-        data = r.json()
-        # for word_data in data:
-        #     definition = word_data['meanings'][0]['definitions'][0]['definition']
-        #     definitions.append(definition)
+        s = self.path
+        url_components = parse.urlsplit(s)
+        query_string_list = parse.parse_qsl(url_components.query)
+        dic = dict(query_string_list)
+        definitions = []
+        if 'name' in dic:
+            name = dic['name']
+            url = 'https://restcountries.com/v3.1/name/'
+            r = requests.get(url + name)
+            data = r.json()
+            for word_data in data:
+                definition = word_data["name"]
+                definitions.append(definition)
 
-        message = str(data)
+            message = str(definitions)
 
         # else:
         #     message = "Please provide me with a word"
+
 
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
@@ -29,4 +30,3 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(message.encode())
 
         return
-    
