@@ -3,12 +3,6 @@ from urllib import parse
 import requests
 
 
-def q_handler(dic, key_word, url):
-    q_key = dic[key_word]
-    res = requests.get(url + q_key)
-    data = res.json()
-    return data
-
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         s = self.path
@@ -18,14 +12,14 @@ class handler(BaseHTTPRequestHandler):
 
         output = ''
 
-        if 'country' in dic:
-            country = dic['country']
-            url = 'https://restcountries.com/v3.1/name/'
-            r = requests.get(url + country)
-            data = r.json()
-            for items in data:
-                output = f"The capital of {items['name']['common']} is {items['capital'][0]}."
-            message = output
+        # if 'country' in dic:
+        #     country = dic['country']
+        #     url = 'https://restcountries.com/v3.1/name/'
+        #     r = requests.get(url + country)
+        #     data = r.json()
+        #     for items in data:
+        #         output = f"The capital of {items['name']['common']} is {items['capital'][0]}."
+        #     message = output
 
         if 'capital' in dic:
             capital = dic['capital']
