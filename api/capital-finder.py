@@ -19,19 +19,12 @@ class handler(BaseHTTPRequestHandler):
         output = ''
 
         if 'country' in dic:
-            # country = dic['country']
-            # url = 'https://restcountries.com/v3.1/name/'
-            # r = requests.get(url + country)
-            # data = r.json()
             for items in q_handler(dic, "country", "https://restcountries.com/v3.1/name/"):
                 output = f"The capital of {items['name']['common']} is {items['capital'][0]}."
+
             message = output
 
-        if 'capital' in dic:
-            # capital = dic['capital']
-            # url = 'https://restcountries.com/v2/capital/'
-            # r = requests.get(url + capital)
-            # data = r.json()
+        elif 'capital' in dic:
             for items in q_handler(dic, "capital", "https://restcountries.com/v2/capital/"):
                 output = f"{items['capital']} is the capital of {items['name']}."
             message = output
