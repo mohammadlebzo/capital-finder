@@ -27,7 +27,7 @@ class handler(BaseHTTPRequestHandler):
                 output = f"The capital of {items['name']['common']} is {items['capital'][0]}."
             message = output
 
-        elif 'capital' in dic:
+        if 'capital' in dic:
             capital = dic['capital']
             url = 'https://restcountries.com/v2/capital/'
             r = requests.get(url + capital)
