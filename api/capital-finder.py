@@ -15,7 +15,7 @@ class handler(BaseHTTPRequestHandler):
             r = requests.get(url + name)
             data = r.json()
             for word_data in data:
-                definition = word_data["name"]
+                definition = word_data["name"]["common"]
                 definitions.append(definition)
 
             message = str(definitions)
