@@ -27,7 +27,7 @@ class handler(BaseHTTPRequestHandler):
             r = requests.get(url + capital)
             data = r.json()
             for items in data:
-                output = f"{items['capital'][0]} is the capital of {items['name']['common']}."
+                output = f"{items['capital'][0]} is the capital of {items['name']}."
             message = output
 
         # else:
