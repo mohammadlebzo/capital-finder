@@ -21,7 +21,7 @@ class handler(BaseHTTPRequestHandler):
                 output = f"The capital of {items['name']['common']} is {items['capital'][0]}."
             message = output
 
-        elif 'capital' in dic:
+        if 'capital' in dic:
             capital = dic['capital']
             r = requests.get(url + capital)
             data = r.json()
@@ -29,8 +29,8 @@ class handler(BaseHTTPRequestHandler):
                 output = f"{items['capital'][0]} is the capital of {items['name']['common']}."
             message = output
 
-        else:
-            message = "Please provide me with a word"
+        # else:
+        #     message = "Please provide me with a word"
 
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
